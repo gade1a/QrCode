@@ -1,0 +1,18 @@
+{% if qrcodes %}
+    <div class="row">
+        {% for qr in qrcodes %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ url_for('static', filename='uploads/' ~ qr.imagem_nome) }}" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Texto:</strong> {{ qr.dados }}</p>
+                        <p class="text-muted small">Criado em: {{ qr.criado_em.strftime('%d/%m/%Y %H:%M') }}</p>
+                        <a href="{{ url_for('download', nome=qr.imagem_nome) }}" class="btn btn-outline-primary btn-sm">Baixar</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Nenhum QR Code gerado ainda.</p>
+{% endif %}
